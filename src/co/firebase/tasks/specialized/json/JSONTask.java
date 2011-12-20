@@ -27,16 +27,14 @@ extends OuterTask<InnerParams, InnerProgress, JSONResult, InnerParams, InnerProg
 				try {
 					json = jsonResult.startsWith("[") ? new JSONArray(jsonResult) : new JSONObject(jsonResult);
 				} catch (JSONException e) {
-					return new JSONResult(null,e);
+					return jsonStringResult.asInnerOf(new JSONResult(null,e));
 				}
-				return new JSONResult(json, null);
+				return jsonStringResult.asInnerOf(new JSONResult(json, null));
 			}
-			return new JSONResult(null);
+			return jsonStringResult.asInnerOf(new JSONResult(null));
 		}
 		else {
-			JSONResult result = new JSONResult(null);
-			result.setInnerResult(jsonStringResult);
-			return result;
+			return jsonStringResult.asInnerOf(new JSONResult(null));
 		}
 	}
 	
