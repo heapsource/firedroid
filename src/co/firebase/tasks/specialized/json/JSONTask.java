@@ -1,5 +1,6 @@
 package co.firebase.tasks.specialized.json;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,9 +23,9 @@ extends OuterTask<InnerParams, InnerProgress, JSONResult, InnerParams, InnerProg
 		if(jsonStringResult.isSuccess()) {
 			String jsonResult = jsonStringResult.getValue();
 			if (jsonResult != null && !"".equalsIgnoreCase(jsonResult)) {
-				JSONObject json;
+				Object json;
 				try {
-					json = new JSONObject(jsonResult);
+					json = jsonResult.startsWith("[") ? new JSONArray(jsonResult) : new JSONObject(jsonResult);
 				} catch (JSONException e) {
 					return new JSONResult(null,e);
 				}

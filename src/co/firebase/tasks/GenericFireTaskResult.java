@@ -71,8 +71,9 @@ public class GenericFireTaskResult<T> implements FireTaskResult<T> {
 	 *            the successMessage to set
 	 */
 	@Override
-	public void setSuccessMessage(String successMessage) {
+	public GenericFireTaskResult<T> setSuccessMessage(String successMessage) {
 		this.successMessage = successMessage;
+		return this;
 	}
 
 	/**
@@ -84,8 +85,9 @@ public class GenericFireTaskResult<T> implements FireTaskResult<T> {
 	}
 
 	@Override
-	public void setErrorMessage(String errorMessage) {
+	public GenericFireTaskResult<T> setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+		return this;
 	}
 
 	@Override
@@ -125,7 +127,8 @@ public class GenericFireTaskResult<T> implements FireTaskResult<T> {
 	}
 
 	@Override
-	public void setValue(T value) {
+	public GenericFireTaskResult<T> setValue(T value) {
 		this.returnedValue = value;
+		return this;
 	}
 }

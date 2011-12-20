@@ -9,6 +9,8 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import org.apache.http.auth.Credentials;
+
 /**
  * Standard parameters for a Web HTTP Request.
  * @author Johan Hernandez<johan@firebase.co>
@@ -19,6 +21,7 @@ public class WebRequestParams {
 	private List<NameValuePair> bodyValues;
 	private AbstractHttpClient client;
 	private ArrayList<Cookie> cookies;
+	private Credentials credentials;
 	
 	public WebRequestParams() {
 		
@@ -68,5 +71,11 @@ public class WebRequestParams {
 	
 	public boolean hasCookies() {
 		return cookies != null && cookies.size() > 0;
+	}
+	public Credentials getCredentials() {
+		return credentials;
+	}
+	public void setCredentials(Credentials credentials) {
+		this.credentials = credentials;
 	}
 }

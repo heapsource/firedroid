@@ -3,6 +3,7 @@ package co.firebase.tasks.specialized.http;
 import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
+
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -12,6 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.content.Context;
 
+import co.firebase.Base64;
 import co.firebase.R;
 import co.firebase.tasks.FireTask;
 import co.firebase.tasks.specialized.WebRequestParams;
@@ -51,6 +53,9 @@ public class HttpTask extends
 		
 		WebRequestResult result = null;
 		AbstractHttpClient httpclient = webParams.getHttpClient() != null ? webParams.getHttpClient() : new DefaultHttpClient();
+		if(webParams.getCredentials() != null) {
+			webParams.getHttpRequest().setHeader("Authorization", "Basic " + Base64.encodeBytes((webParams.getCredentials().getUserPrincipal().getName() + ":" + webParams.getCredentials().getPassword()).getBytes()));
+		}
 		if(webParams.hasCookies()) {
 			for(Cookie cookie : webParams.cookies()) {
 				httpclient.getCookieStore().addCookie(cookie);
